@@ -1,0 +1,17 @@
+workflows:
+  android-build:
+    name: Android build (assembleDebug)
+    max_build_duration: 60
+    # you can set env vars here if needed:
+    environment:
+      vars: {}
+
+    scripts:
+      - name: Build debug APK
+        script: |
+          echo "Make gradlew executable (if present) and run assembleDebug"
+          chmod +x gradlew || true
+          ./gradlew assembleDebug --no-daemon -Pandroid.debug.obsoleteApi=true --stacktrace --info
+    artifacts:
+      - app/build/outputs/apk/debug/app-debug.apk
+
